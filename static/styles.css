@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #e7e7e7;
+    background-color: #d6d6d6;
     margin: 0;
     padding: 20px;
 }
@@ -66,8 +66,6 @@ hr {
     border: 1px solid #ccc;
     border-radius: 10px;
     margin-bottom: 15px;
-    border-left: 5px solid #007bff;
-    min-height: 200px;
 }
 .panel_principal {
     display: flex;
@@ -93,6 +91,9 @@ hr {
 }
 label {
     font-weight: bold;
+}
+h2 {
+    color: #333;
 }
 .materias button {
     width: 180px;
@@ -138,6 +139,14 @@ label {
 .completada {
     color: #28a745;
     font-weight: bold;
+}
+.tarea {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border-left: 5px solid #007bff;
+    min-height: 250px;
 }
 .completada-card {
     opacity: 0.8;
@@ -220,10 +229,7 @@ h1.otras {
     margin:auto;
     background-color: #cacaca;
     color: #607d8b;
-    padding: 5px;
-    border-radius: 30px;
-    text-align: center;
-    margin-bottom: 30px;
+    
 }
 .encabezado {
     background-color: #991426;
