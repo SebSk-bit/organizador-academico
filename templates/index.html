@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistente Academico de tareas</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="encabezado">
+    <h1>Asistente Académico de Tareas</h1>
+    <p>Organiza y gestiona tus tareas académicas de manera eficiente</p>
+</div>
+<div class="panel_principal">
+    <div class="contenedor_formulario">
+        <h2>Agregar tarea</h2>
+    <form action="/guardar" method="POST">
+        <label>Título:</label>
+        <br>
+        <input type="text" name="titulo" required >
+        <br><br>
+
+        <label>Elegir materia:</label>
+        <br>
+        <select name="materia" >
+
+    <option>Matemáticas</option>
+    <option>Lengua y Literatura</option>
+    <option>Inglés</option>
+    <option>Física</option>
+    <option>Química</option>
+    <option>Otras materias</option>
+
+</select>
+        <br><br>
+
+        <label>Descripción:</label>
+        <br>
+        <textarea name="descripcion" required></textarea>
+        <br><br>
+
+        <label>Fecha de entrega:</label>
+        <br>
+        <input type="date" name="fecha" required >
+        <br><br>
+
+        <button type="submit">
+            Guardar tarea
+        </button>
+
+    </form>
+    </div>
+    <div class="resumen">
+        <h2>Tareas pendientes</h2>
+        <p>Matematicas: {{ matematicas }} pendientes</p>
+        <p>Lengua y Literatura: {{ lengua }} pendientes</p>
+        <p>Inglés: {{ ingles }} pendientes</p>
+        <p>Física: {{ fisica }} pendientes</p>
+        <p>Química: {{ quimica }} pendientes</p>
+        <p>Otras: {{ otras }} pendientes</p>
+    </div>
+</div>
+    <hr>
+    <h2>Tareas guardadas-Materias</h2>
+
+<div class="grid-materias">
+
+    <a href="/matematicas" class="tarjeta-materia matematicas">
+        <h3>📘 Matemáticas</h3>
+    </a>
+
+    <a href="/lengua" class="tarjeta-materia lengua">
+        <h3>📖 Lengua y Literatura</h3>
+    </a>
+
+    <a href="/ingles" class="tarjeta-materia ingles">
+        <h3>🇬🇧 Inglés</h3>
+    </a>
+
+    <a href="/fisica" class="tarjeta-materia fisica">
+        <h3>⚛️ Física</h3>
+    </a>
+
+    <a href="/quimica" class="tarjeta-materia quimica">
+        <h3>🧪 Química</h3>
+    </a>
+
+    <a href="/otras" class="tarjeta-materia otras">
+        <h3>📂 Otras</h3>
+    </a>
+
+</div>
+
+</body>
+</html>
