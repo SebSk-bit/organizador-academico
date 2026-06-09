@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: sanvito, cursive;
     background-color: #d6d6d6;
     margin: 0;
     padding: 20px;
@@ -101,35 +101,7 @@ h2 {
     font-weight: bold;
     font-size: 25px;
     
-}
-.matematicas {
-    background-color: #2196f3;
-    color: black;
-}
 
-.lengua {
-    background-color: #9c27b0;
-    color: black;
-}
-
-.ingles {
-    background-color: #f44336;
-    color: black;
-}
-
-.fisica {
-    background-color: #ff9800;
-    color: black;
-}
-
-.quimica {
-    background-color: #4caf50;
-    color: black;
-}
-
-.otras {
-    background-color: #607d8b;
-    color: black;
 }
 .pendiente {
     color: #ff9800;
@@ -280,6 +252,7 @@ h1.otras {
     box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
 
     transition: 0.2s;
+    font-size: 22px;
 }
 
 .tarjeta-materia:hover {
