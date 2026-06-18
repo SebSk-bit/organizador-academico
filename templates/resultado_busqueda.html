@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de búsqueda</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1 class="otras">Resultados de búsqueda</h1>
+    <a href="/">
+        <button>🏠 Volver al inicio</button>
+    </a>
+    <hr>
+    {% if tareas %}
+        <div class="tareas_contenedor">
+        {% for tarea in tareas %}
+            <div class="tarea {% if tarea[2] == "Matemáticas" %}matematicas{% elif tarea[2] == "Lengua y Literatura" %}lengua{% elif tarea[2] == "Inglés" %}ingles{% elif tarea[2] == "Física" %}fisica{% elif tarea[2] == "Química" %}quimica{% else %}otras{% endif %}">
+                <h3>{{ tarea[1] }}</h3>
+                <p>{{ tarea[3] }}</p>
+                <p>Fecha: {{ tarea[4] }}</p>
+                {% if tarea[5] == "Pendiente" %}
+                    <p class="pendiente">⏳ Pendiente</p>
+                {% else %}
+                    <p class="completada">✅ Completada</p>
+                {% endif %}
+                <p><strong>Materia:</strong> {{ tarea[2] }}</p>
+                {% if tarea[2] == "Matemáticas" %}
+                <a href="/matematicas">
+                    <button>Ver en Matemáticas</button>
+                </a>
+                {% elif tarea[2] == "Lengua y Literatura" %}
+                <a href="/lengua">
+                    <button>Ver en Lengua y Literatura</button>
+                </a>
+                {% elif tarea[2] == "Inglés" %} 
+                <a href="/ingles">
+                    <button>Ver en Inglés</button>
+                </a>
+                {% elif tarea[2] == "Física" %}
+                <a href="/fisica">
+                    <button>Ver en Física</button>
+                </a>
+                {% elif tarea[2] == "Química" %}
+                <a href="/quimica">
+                    <button>Ver en Química</button>
+                </a>
+                {% else %}  
+                <a href="/otras">
+                    <button>Ver en Otras</button>
+                </a>
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+    {% else %}
+        <p>No se encontraron resultados.</p>
+    {% endif %}
+</body>
+</html>

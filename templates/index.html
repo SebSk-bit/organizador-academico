@@ -15,9 +15,9 @@
     <div class="contenedor_formulario">
         <h2>Agregar tarea</h2>
     <form action="/guardar" method="POST">
-        <label>Título:</label>
+        <label>Nombre de la tarea:</label>
         <br>
-        <input type="text" name="titulo" required >
+        <input type="text" name="titulo"  placeholder="Ingresar un nombre corto" required >
         <br><br>
 
         <label>Elegir materia:</label>
@@ -36,7 +36,7 @@
 
         <label>Descripción:</label>
         <br>
-        <textarea name="descripcion" required></textarea>
+        <textarea name="descripcion" placeholder="Ingresar detalles de la tarea o instrucciones relacionadas" required></textarea>
         <br><br>
 
         <label>Fecha de entrega:</label>
@@ -52,7 +52,7 @@
     </div>
     <div class="resumen">
         <h2>Tareas pendientes</h2>
-        <p>Matematicas: {{ matematicas }} pendientes</p>
+        <p>Matemáticas: {{ matematicas }} pendientes</p>
         <p>Lengua y Literatura: {{ lengua }} pendientes</p>
         <p>Inglés: {{ ingles }} pendientes</p>
         <p>Física: {{ fisica }} pendientes</p>
@@ -62,7 +62,36 @@
 </div>
     <hr>
     <h2>Tareas guardadas-Materias</h2>
-
+    <h2>Próximas tareas por entregar</h2>
+    {% if proximas %}
+    <div class="tareas_contenedor">
+    {% for tarea in proximas %}
+    <div class="tarea">
+        <h3>{{ tarea[1] }}</h3>
+        <p>{{ tarea[3] }}</p>
+        <p>Fecha: {{ tarea[4] }}</p>
+        <p><strong>Materia:</strong> {{ tarea[2] }}</p>
+    
+        {% if tarea[5] == "Pendiente" %}
+            <p class="pendiente">⏳ Pendiente</p>
+        {% else %}
+   
+            <p class="completada">✅ Completada</p>
+        {% endif %}
+    </div>
+    
+    {% endfor %}
+   
+    {% else %}
+    <p>No hay tareas próximas por entregar.</p>
+    {% endif %}
+  </div>
+<div class="busqueda">
+<form action="/buscar" method="GET">
+    <input type="text" name="texto" placeholder="Buscar por título de tarea..." required>
+    <button type="submit">🔍 Buscar</button>
+</form>
+</div>
 <div class="grid-materias">
 
     <a href="/matematicas" class="tarjeta-materia matematicas">

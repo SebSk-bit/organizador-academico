@@ -45,6 +45,19 @@ def inicio():
     cursor.execute("SELECT COUNT(*) FROM tareas WHERE materia='Otras' AND estado='Pendiente'")
     otras = cursor.fetchone()[0]
 
+    from datetime import date
+    hoy = date.today().isoformat()
+
+    cursor.execute("""
+    SELECT * FROM tareas
+    WHERE estado = 'Pendiente'
+    AND fecha >= ?
+    ORDER BY fecha ASC
+    LIMIT 3
+    """, (hoy,))
+
+    proximas = cursor.fetchall()
+
     conexion.close()
 
     return render_template(
@@ -54,7 +67,8 @@ def inicio():
         ingles=ingles,
         fisica=fisica,
         quimica=quimica,
-        otras=otras
+        otras=otras,
+        proximas=proximas
     )
 
 @app.route("/guardar", methods=["POST"])
@@ -78,6 +92,28 @@ def guardar():
     conexion.close()
 
     return redirect("/")
+@app.route("/buscar")
+def buscar():
+
+    texto = request.args.get("texto", "")
+
+    conexion = sqlite3.connect("database.db")
+    cursor = conexion.cursor()
+
+    cursor.execute("""
+    SELECT * FROM tareas
+    WHERE titulo LIKE ? OR materia LIKE ?
+    ORDER BY estado DESC, fecha ASC
+    """, (f"%{texto}%", f"%{texto}%"))
+
+    tareas = cursor.fetchall()
+
+    conexion.close()
+
+    return render_template(
+        "resultado_busqueda.html",
+        tareas=tareas,
+    )
 @app.route("/eliminar/<int:id>")
 def eliminar(id):
 
@@ -160,7 +196,7 @@ def matematicas():
     cursor.execute("""
     SELECT * FROM tareas
     WHERE materia = 'Matemáticas'
-    ORDER BY fecha ASC
+    ORDER BY estado DESC, fecha ASC
     """)
 
     tareas = cursor.fetchall()
@@ -182,7 +218,7 @@ def lengua():
     cursor.execute("""
     SELECT * FROM tareas
     WHERE materia = 'Lengua y Literatura'
-    ORDER BY fecha ASC
+    ORDER BY estado DESC, fecha ASC
     """)
 
     tareas = cursor.fetchall()
@@ -204,7 +240,7 @@ def ingles():
     cursor.execute("""
     SELECT * FROM tareas
     WHERE materia = 'Inglés'
-    ORDER BY fecha ASC
+    ORDER BY estado DESC, fecha ASC
     """)
 
     tareas = cursor.fetchall()
@@ -226,7 +262,7 @@ def fisica():
     cursor.execute("""
     SELECT * FROM tareas
     WHERE materia = 'Física'
-    ORDER BY fecha ASC
+    ORDER BY estado DESC, fecha ASC
     """)
 
     tareas = cursor.fetchall()
@@ -248,7 +284,7 @@ def quimica():
     cursor.execute("""
     SELECT * FROM tareas
     WHERE materia = 'Química'
-    ORDER BY fecha ASC
+    ORDER BY estado DESC, fecha ASC
     """)
 
     tareas = cursor.fetchall()
@@ -270,7 +306,7 @@ def otras():
     cursor.execute("""
     SELECT * FROM tareas
     WHERE materia = 'Otras'
-    ORDER BY fecha ASC
+    ORDER BY estado DESC, fecha ASC
     """)
 
     tareas = cursor.fetchall()
